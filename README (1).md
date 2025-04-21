@@ -61,7 +61,7 @@ for file in $(ls -t); do # Sort files by time of modification
                -v C="$(awk '/CPU/,/END/' "$file" | sed '1d;2d;3d;4d;$d')" \
                -v C="$(awk '/CPU/,/END/' "$file" | sed '1d;2d;3d;4d;$d')" \
                '{sub(/ADD_DISK_RECORD/, D "\nADD_DISK_RECORD")}1 {sub(/ADD_MEM_RECORD/, M "\nADD_MEM_RECORD")}1 {sub(/ADD_CPU_RECORD/, C "\nADD_CPU_RECORD")}1' avg_calc)" > avg_calc_temp
-    cat avg_calc_temp > avg_calc
+    cat avg_calc_temp > avg_calc #TEMP FILE IS NEEDED BECAUSE USING THE SAME FILE FOR READ AND WRITE IN SAME COMMAND WOULD MAKE ISSUES
         count=$((count + 1))
  elif [[ $count -ge 1 ]]; then
         break #If the newest file that is not other than the timestamp file is found, break
